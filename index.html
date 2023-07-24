@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/index.css">
+    <title>junk-ai</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Image</h1>
+        <div class="as-container">
+            <div class="img-container"></div>
+            <span class="buttons-container">
+                <label for="upload-image" class="upload-btn"> Add Image </label>
+                <input type="file" id="upload-image" style="display: none;" accept="image/*">
+                <button id="rotate-left">Rotate Left</button>
+                <button id="rotate-right">Rotate Right</button>
+                <label for="angle"> Angle: </label>
+                <input id="angle">
+            </span>
+        </div>
+    </div>
+    <script src="opencv.js"></script>
+    <script src="./index.js" type="module"></script>
+</body>
+</html>

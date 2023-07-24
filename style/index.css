@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500&display=swap');
+* {
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    position: relative; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 2%;
+    flex-direction: column;
+    border: 1px solid rgb(125, 125, 125);
+    border-radius: 5px;
+    overflow: hidden; 
+}
+
+.container h1 {
+    margin-bottom: 500px;
+    color: #FBA1B7;
+}
+
+.container .as-container {
+    border-top: 1px solid rgb(125, 125, 125);
+    border-left: 1px solid rgb(125, 125, 125);
+    border-right: 1px solid rgb(125, 125, 125);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.container .as-container button,
+.container .as-container label,
+.container .as-container input {
+    padding: 5px;
+    border-radius: 25px;
+    width: 100px;
+    justify-content: space-between;
+    border: none;
+    cursor: pointer;
+}
+.container .as-container{
+    width: 600px;
+}
+.container .as-container input {
+    border: 1px solid rgb(125, 125, 125);
+}
+
+.container .as-container .upload-btn {
+    font-size: 13.33333px;
+    background-color: #f0f0f0;
+    margin-right: 4px;
+}
+
+.uploaded-image {
+    width: 30px;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease; 
+}
