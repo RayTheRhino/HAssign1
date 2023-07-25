@@ -3,7 +3,6 @@ const imgContainer = document.querySelector('.img-container');
 const container = document.querySelector('.container');
 
 let lastUploadedImg = null;
-let rotationAngle = 0;
 
 uploadImageBtn.addEventListener('change', (event) => {
     const files = event.target.files;
@@ -15,16 +14,14 @@ uploadImageBtn.addEventListener('change', (event) => {
         const randomX = Math.floor(Math.random() * (container.clientWidth - 100));
         const randomY = Math.floor(Math.random() * (container.clientHeight - 100));
 
-        img.style.left = `${randomX}px`; //horizantal position for left edge
-        img.style.top = `${randomY}px`; //vertical position for top edge
-
-        if (lastUploadedImg) {
-            img.style.transform = `rotate(${lastUploadedImg.rotationAngle}deg)`;
-        }
+        img.style.left = `${randomX}px`;
+        img.style.top = `${randomY}px`;
+        img.rotationAngle = 0;
+        img.addEventListener('click', () => {
+            lastUploadedImg = img;
+        });
 
         imgContainer.appendChild(img);
-        lastUploadedImg = img;
-        lastUploadedImg.rotationAngle = 0;
     }
 });
 
@@ -32,24 +29,22 @@ const rotateLeftBtn = document.getElementById('rotate-left');
 const rotateRightBtn = document.getElementById('rotate-right');
 const angleInput = document.getElementById('angle');
 
-function applyRotation(angle) {
-    if (lastUploadedImg) {
-        lastUploadedImg.rotationAngle = angle;
-        lastUploadedImg.style.transform = `rotate(${angle}deg)`;
+function applyRotation(angle, img) {
+    if (img) {
+        img.rotationAngle = (img.rotationAngle + angle) % 360;
+        img.style.transform = `rotate(${img.rotationAngle}deg)`;
     }
 }
 
 rotateLeftBtn.addEventListener('click', () => {
     if (lastUploadedImg) {
-        rotationAngle -= 90;
-        applyRotation(rotationAngle);
+        applyRotation(-90, lastUploadedImg);
     }
 });
 
 rotateRightBtn.addEventListener('click', () => {
     if (lastUploadedImg) {
-        rotationAngle += 90;
-        applyRotation(rotationAngle);
+        applyRotation(90, lastUploadedImg);
     }
 });
 
@@ -57,8 +52,9 @@ angleInput.addEventListener('keyup', (event) => {
     if (event.key === 'Enter') {
         const enteredAngle = parseFloat(angleInput.value);
         if (!isNaN(enteredAngle)) {
-            rotationAngle = enteredAngle;
-            applyRotation(rotationAngle);
+            const currentAngle = lastUploadedImg ? lastUploadedImg.rotationAngle : 0;
+            const rotationAngle = enteredAngle - currentAngle;
+            applyRotation(rotationAngle, lastUploadedImg);
         }
     }
 });
